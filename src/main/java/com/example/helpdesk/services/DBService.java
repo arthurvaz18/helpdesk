@@ -24,10 +24,10 @@ public class DBService {
         Tecnico tec1 = new Tecnico(null, "Valdir Cezar", "35474246315", "valdir@mail.com", "123");
         tec1.addPerfil(Perfil.ADMIN);
         
-        Tecnico tec2 = new Tecnico(null, "Ana Silva", "12345678901", "ana.silva@mail.com", "senha123");
+        Tecnico tec2 = new Tecnico(null, "Ana Silva", "12345678901", "ana.silva@mail.com", "789");
         tec2.addPerfil(Perfil.TECNICO);
 
-        Tecnico tec3 = new Tecnico(null, "Carlos Almeida", "98765432109", "carlos.almeida@mail.com", "pass456");
+        Tecnico tec3 = new Tecnico(null, "Carlos Almeida", "98765432109", "carlos.almeida@mail.com", "456");
         tec3.addPerfil(Perfil.ADMIN);
 
         Cliente cli1 = new Cliente(null, "Linus Torvalds", "79681176740", "linus@mail.com", "456");
