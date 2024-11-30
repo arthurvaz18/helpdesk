@@ -1,6 +1,7 @@
 package com.example.helpdesk.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public abstract class Pessoa implements Serializable {
 
     @Column(unique = true)
     protected String cpf;
+
 
     @Column(unique = true)
     protected String email;

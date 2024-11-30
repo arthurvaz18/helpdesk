@@ -9,6 +9,8 @@ import com.example.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.example.helpdesk.services.exceptions.ObjectnotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +36,13 @@ public class TecnicoService {
         validaPorCpfEEmail(objDTO);
         Tecnico newObj = new Tecnico((objDTO));
         return repository.save(newObj);
+    }
+    public Tecnico update(Integer id, @Valid TecnicoDTO objDTO){
+        objDTO.setId(id);
+        Tecnico oldObj = FindById(id);
+        validaPorCpfEEmail(objDTO);
+        oldObj = new Tecnico(objDTO);
+        return repository.save(oldObj);
     }
 
     private void validaPorCpfEEmail(TecnicoDTO objDTO) {
