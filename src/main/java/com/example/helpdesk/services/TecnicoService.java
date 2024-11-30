@@ -37,7 +37,8 @@ public class TecnicoService {
         Tecnico newObj = new Tecnico((objDTO));
         return repository.save(newObj);
     }
-    public Tecnico update(Integer id, @Valid TecnicoDTO objDTO){
+
+    public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
         objDTO.setId(id);
         Tecnico oldObj = FindById(id);
         validaPorCpfEEmail(objDTO);
@@ -45,13 +46,22 @@ public class TecnicoService {
         return repository.save(oldObj);
     }
 
+    public void delete(Integer id) {
+        Tecnico obj = FindById(id);
+        if(obj.getChamados().size()>0){
+            throw new DataIntegrityViolationException("Tecnico possuí ordens de serviço e não pode ser deletado!");
+        }else{
+            repository.deleteById(id);
+        }
+    }
+
     private void validaPorCpfEEmail(TecnicoDTO objDTO) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
-        if(obj.isPresent() && obj.get().getId() != objDTO.getId()){
+        if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
             throw new DataIntegrityViolationException("CPF já está cadastrado no sistema");
         }
         obj = pessoaRepository.findByEmail(objDTO.getEmail());
-        if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+        if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
             throw new DataIntegrityViolationException("Email já está cadastrado cadastrado");
         }
 
