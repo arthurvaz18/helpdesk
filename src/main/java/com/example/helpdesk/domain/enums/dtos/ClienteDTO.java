@@ -1,6 +1,6 @@
 package com.example.helpdesk.domain.enums.dtos;
 
-import com.example.helpdesk.domain.enums.Cliente;
+import com.example.helpdesk.domain.Cliente;
 import com.example.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.br.CPF;

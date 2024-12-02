@@ -1,16 +1,23 @@
 package com.example.helpdesk.services;
 
-import com.example.helpdesk.domain.enums.*;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import com.example.helpdesk.domain.Chamado;
+import com.example.helpdesk.domain.Cliente;
+import com.example.helpdesk.domain.Tecnico;
+import com.example.helpdesk.domain.enums.Prioridade;
+import com.example.helpdesk.domain.enums.Status;
 import com.example.helpdesk.domain.enums.dtos.ChamadoDTO;
 import com.example.helpdesk.repositories.ChamadoRepository;
 import com.example.helpdesk.services.exceptions.ObjectnotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ChamadoService {
@@ -18,22 +25,21 @@ public class ChamadoService {
     @Autowired
     private ChamadoRepository repository;
     @Autowired
-    TecnicoService tecnicoService;
+    private TecnicoService tecnicoService;
     @Autowired
-    ClienteService clienteService;
+    private ClienteService clienteService;
 
     public Chamado findById(Integer id) {
         Optional<Chamado> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! ID:" + id));
-
+        return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! ID: " + id));
     }
 
     public List<Chamado> findAll() {
         return repository.findAll();
     }
 
-    public Chamado create(ChamadoDTO objDTO) {
-        return repository.save(newChamado(objDTO));
+    public Chamado create(ChamadoDTO obj) {
+        return repository.save(newChamado(obj));
     }
 
     public Chamado update(Integer id, @Valid ChamadoDTO objDTO) {
@@ -44,12 +50,12 @@ public class ChamadoService {
     }
 
     private Chamado newChamado(ChamadoDTO obj) {
-        Tecnico tecnico = tecnicoService.FindById(obj.getTecnico());
-        Cliente cliente = clienteService.findById((obj.getCliente()));
+        Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
+        Cliente cliente = clienteService.findById(obj.getCliente());
 
         Chamado chamado = new Chamado();
-        if (obj.getId() != null) {
-            chamado.setId((obj.getId()));
+        if(obj.getId() != null) {
+            chamado.setId(obj.getId());
         }
 
         if(obj.getStatus().equals(2)) {
@@ -62,10 +68,7 @@ public class ChamadoService {
         chamado.setStatus(Status.toEnum(obj.getStatus()));
         chamado.setTitulo(obj.getTitulo());
         chamado.setObservacoes(obj.getObservacoes());
-
         return chamado;
     }
-
-
 
 }

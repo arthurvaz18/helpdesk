@@ -1,13 +1,15 @@
-package com.example.helpdesk.domain.enums;
-
-import com.example.helpdesk.domain.enums.dtos.TecnicoDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+package com.example.helpdesk.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+import com.example.helpdesk.domain.enums.Perfil;
+import com.example.helpdesk.domain.enums.dtos.TecnicoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Tecnico extends Pessoa {
@@ -19,13 +21,12 @@ public class Tecnico extends Pessoa {
 
     public Tecnico() {
         super();
-        addPerfil(Perfil.TECNICO);
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
-        addPerfil(Perfil.TECNICO);
-
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Tecnico(TecnicoDTO obj) {
@@ -35,8 +36,8 @@ public class Tecnico extends Pessoa {
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.senha = obj.getSenha();
-        this.dataCriacao = obj.getDataCriacao();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+        this.dataCriacao = obj.getDataCriacao();
     }
 
     public List<Chamado> getChamados() {
@@ -46,4 +47,5 @@ public class Tecnico extends Pessoa {
     public void setChamados(List<Chamado> chamados) {
         this.chamados = chamados;
     }
+
 }

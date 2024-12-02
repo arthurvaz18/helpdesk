@@ -1,10 +1,9 @@
 package com.example.helpdesk.domain.enums.dtos;
 
 import com.example.helpdesk.domain.enums.Perfil;
-import com.example.helpdesk.domain.enums.Tecnico;
+import com.example.helpdesk.domain.Tecnico;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;

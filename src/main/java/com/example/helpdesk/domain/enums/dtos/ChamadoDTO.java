@@ -1,6 +1,6 @@
 package com.example.helpdesk.domain.enums.dtos;
 
-import com.example.helpdesk.domain.enums.Chamado;
+import com.example.helpdesk.domain.Chamado;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;

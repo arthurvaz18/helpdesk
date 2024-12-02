@@ -1,7 +1,7 @@
 
 package com.example.helpdesk.repositories;
 
-import com.example.helpdesk.domain.enums.Pessoa;
+import com.example.helpdesk.domain.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

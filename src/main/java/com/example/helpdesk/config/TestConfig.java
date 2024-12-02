@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile("dev")
-public class TesteConfig {
+@Profile("test")
+public class TestConfig {
 
     @Autowired
     private DBService dbService;
@@ -17,6 +17,4 @@ public class TesteConfig {
     public void instanciaDB() {
         this.dbService.instanciaDB();
     }
-
-
 }

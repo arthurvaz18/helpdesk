@@ -1,14 +1,22 @@
-package com.example.helpdesk.domain.enums;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.br.CPF;
-
-import javax.persistence.*;
+package com.example.helpdesk.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.example.helpdesk.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public abstract class Pessoa implements Serializable {
@@ -22,7 +30,6 @@ public abstract class Pessoa implements Serializable {
     @Column(unique = true)
     protected String cpf;
 
-
     @Column(unique = true)
     protected String email;
     protected String senha;
@@ -34,19 +41,19 @@ public abstract class Pessoa implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
-    public Pessoa(){
+    public Pessoa() {
         super();
         addPerfil(Perfil.CLIENTE);
     }
 
     public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
+        super();
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
         addPerfil(Perfil.CLIENTE);
-
     }
 
     public Integer getId() {
@@ -90,7 +97,6 @@ public abstract class Pessoa implements Serializable {
     }
 
     public Set<Perfil> getPerfis() {
-        // Converte cada código de perfil em um valor do Perfil.toEnum e coleta em um conjunto (Set) sem duplicatas
         return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
@@ -117,18 +123,24 @@ public abstract class Pessoa implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         Pessoa other = (Pessoa) obj;
         if (cpf == null) {
-            if (other.cpf != null) return false;
-        } else if (!cpf.equals(other.cpf)) return false;
+            if (other.cpf != null)
+                return false;
+        } else if (!cpf.equals(other.cpf))
+            return false;
         if (id == null) {
-            if (other.id != null) return false;
-        } else if (!id.equals(other.id)) return false;
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
         return true;
     }
-
 
 }
