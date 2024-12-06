@@ -12,39 +12,39 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ClienteDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class ClienteDTO implements Serializable { // Permite a serialização do objeto
+    private static final long serialVersionUID = 1L; // Identificador único para serialização
 
-    protected Integer id;
+    protected Integer id; // ID do cliente
     @NotNull(message = "O campo NOME é requerido")
-    protected String nome;
+    protected String nome; // Nome do cliente
     @NotNull(message = "O campo CPF é requerido")
-    @CPF
-    protected String cpf;
+    @CPF // Validação de CPF com formato correto
+    protected String cpf; // CPF do cliente
     @NotNull(message = "O campo EMAIL é requerido")
-    protected String email;
+    protected String email; // Email do cliente
     @NotNull(message = "O campo SENHA é requerido")
-    protected String senha;
+    protected String senha; // Senha do cliente
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    protected LocalDate dataCriacao = LocalDate.now();
+    protected LocalDate dataCriacao = LocalDate.now(); // Data de criação do cliente
 
-    public ClienteDTO() {
+    public ClienteDTO() { // Construtor padrão
         super();
-        addPerfil(Perfil.CLIENTE);
+        addPerfil(Perfil.CLIENTE); // Adiciona perfil CLIENTE
     }
 
-    public ClienteDTO(Cliente obj) {
+    public ClienteDTO(Cliente obj) { // Construtor a partir de um objeto Cliente
         super();
         this.id = obj.getId();
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.senha = obj.getSenha();
-        this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+        this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet()); // Mapeia os perfis para códigos
         this.dataCriacao = obj.getDataCriacao();
-        addPerfil(Perfil.CLIENTE);
+        addPerfil(Perfil.CLIENTE); // Adiciona perfil CLIENTE
     }
 
     public Integer getId() {
@@ -87,19 +87,19 @@ public class ClienteDTO implements Serializable {
         this.senha = senha;
     }
 
-    public Set<Perfil> getPerfis() {
+    public Set<Perfil> getPerfis() { // Retorna os perfis como conjunto de Perfil
         return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void addPerfil(Perfil perfil) {
+    public void addPerfil(Perfil perfil) { // Adiciona um perfil
         this.perfis.add(perfil.getCodigo());
     }
 
-    public LocalDate getDataCriacao() {
+    public LocalDate getDataCriacao() { // Retorna a data de criação
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(LocalDate dataCriacao) { // Define a data de criação
         this.dataCriacao = dataCriacao;
     }
 

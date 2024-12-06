@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+// Permite a serialização do objeto para armazenamento ou transmissão
 public class ChamadoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
