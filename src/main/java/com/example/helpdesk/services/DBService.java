@@ -29,6 +29,7 @@ public class DBService {
     public void instanciaDB() {
 
         Tecnico tec1 = new Tecnico(null, "João Silva", "550.482.150-95", "joao@gmail.com", encoder.encode("123"));
+        tec1.addPerfil(Perfil.ADMIN);
         Tecnico tec2 = new Tecnico(null, "Maria Souza", "903.347.070-56", "maria@gmail.com", encoder.encode("123"));
         Tecnico tec3 = new Tecnico(null, "Carlos Pereira", "271.068.470-54", "carlos@gmail.com", encoder.encode("123"));
         Tecnico tec4 = new Tecnico(null, "Ana Oliveira", "162.720.120-39", "ana@gmail.com", encoder.encode("123"));
