@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
+//testando
 @Configuration
 @Profile("dev") // Define que esta configuração será carregada apenas quando o perfil ativo for "dev".
 public class DevConfig {
@@ -31,3 +31,4 @@ public class DevConfig {
         // Retorna falso como padrão. Neste caso, não possui impacto funcional.
     }
 }
+
